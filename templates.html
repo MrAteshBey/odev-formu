@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ödev Yükleme Formu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>🎓 Ödev Yükleme Formu</h2>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="message">{{ messages[0] }}</div>
+        {% endif %}
+        {% endwith %}
+
+        <form method="POST" enctype="multipart/form-data">
+            <label>Ad:</label>
+            <input type="text" name="name" required>
+
+            <label>Soyad:</label>
+            <input type="text" name="surname" required>
+
+            <label>Okul Numarası:</label>
+            <input type="text" name="student_id" required>
+
+            <h3>📁 Ödev Seçimi</h3>
+            <div class="project-boxes">
+                <label><input type="radio" name="project" value="avokado" required> 🥑 Avokado Çalışması</label>
+                <label><input type="radio" name="project" value="apple_logo"> 🍎 Apple Logo Çalışması</label>
+                <label><input type="radio" name="project" value="sincap"> 🐿️ Sincap Çalışması</label>
+            </div>
+
+            <div class="upload-box" id="drop-area">
+                <p>📤 Dosyanı buraya sürükle veya tıkla</p>
+                <input type="file" name="file" id="fileElem" accept=".png,.psd" required>
+            </div>
+
+            <button type="submit">Yükle</button>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
